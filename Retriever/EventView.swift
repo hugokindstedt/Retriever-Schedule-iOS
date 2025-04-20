@@ -12,25 +12,28 @@ struct EventView: View {
     
     var body: some View {
         VStack (alignment: .leading){
-            HStack{
-
-                
+            /*
+            HStack(spacing: 0){
+                Text(event.startYear)
+                Text("-")
+                Text(event.startMonth)
+                Text("-")
+                Text(event.startDay)
             }.font(.title)
-
-            
+            */
+             
             HStack{
                 HStack(spacing: 0){
                     Text(event.startTime.prefix(2))
                     Text(":")
                     Text(event.startTime.suffix(2))
-                    
                     Text(" - ")
-                        
                     Text(event.endTime.prefix(2))
                     Text(":")
                     Text(event.endTime.suffix(2))
                 }
             }.bold()
+            
             Text(event.kursGrp)
                 .foregroundStyle(.orange)
             Text(event.moment)

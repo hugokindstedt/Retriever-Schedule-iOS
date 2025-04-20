@@ -8,44 +8,6 @@
 import SwiftUI
 import Foundation
 
-@main
-struct RetrieverApp: App {
-    var body: some Scene {
-        WindowGroup {
-            SchemaView()
-        }
-    }
-}
-
-/*
-struct Event {
-    var startDate: String
-    var startTime: String
-    var endDate: String
-    var endTime: String
-    var location: String
-    var kursGrp: String
-    var sign: String
-    var moment: String
-            
-    init(start: String, end: String, location: String, summary: String) {
-        startDate = String(start.firstMatch(of: /DTSTART:(\d+)/)?.1 ?? "N/A")
-        startTime = String(start.firstMatch(of: /T(\d{4})/)?.1 ?? "N/A")
-        
-        endDate = String(end.firstMatch(of: /DTEND:(\d+)/)?.1 ?? "N/A")
-        endTime = String(end.firstMatch(of: /T(\d{4})/)?.1 ?? "N/A")
-        
-        self.location = location
-        
-        let tempKursGrp = String(summary.firstMatch(of: /Kurs\.grp: (.+?)(?=\s+\w+:|\s*$)/)?.1 ?? "N/A")
-        kursGrp = removeDuplicates(input: tempKursGrp)
-        
-        sign = String(summary.firstMatch(of: /Sign\: (.+?)(?=\s+\w+:|\s*$)/)?.1 ?? "N/A")
-        moment = String(summary.firstMatch(of: /Moment\: (.+?)(?=\s+\w+:|\s*$)/)?.1 ?? "N/A")
-    }
-}
-*/
-
 func removeDuplicates(input: String) -> String {
     let stringList = input.split(separator: " ")
     
@@ -106,17 +68,53 @@ func parseIcalToEvents(icalFile: String) -> [Event]{
     return eventList
 }
 
-//print("Hello, World!")
-
-//var icalFile: String = try await getSchema()
-
-//var events = parseIcalToEvents(icalFile: icalFile)
-
-/*for i in events{
-    print(i)
-    print("\n")
-}*/
-
 enum HTTPError: Error {
     case invalidResponse
+}
+
+@main
+struct RetrieverApp: App {
+    var body: some Scene {
+        WindowGroup {
+            RootView()
+        }
+    }
+}
+
+struct RootView: View {
+    @State private var events: [Event] = []
+    @State private var isLoading = true
+    
+    var body: some View {
+        Group {
+            if isLoading {
+                Text("Loading...")
+            } else {
+                SchemaView(events: events)
+            }
+        }
+        .task {
+            print("Hello, World!")
+            
+            var icalFile: String = ""
+            
+            do{
+                icalFile = try await getSchema()
+            } catch {
+                _ = HTTPError.invalidResponse
+                print("ERROR")
+            }
+            
+            events = parseIcalToEvents(icalFile: icalFile)
+            
+            /*
+            for i in events{
+                print(i)
+                print("\n")
+            }
+            */
+            
+            isLoading = false
+        }
+    }
 }

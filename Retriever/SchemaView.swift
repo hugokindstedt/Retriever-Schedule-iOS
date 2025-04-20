@@ -1,21 +1,22 @@
 //
-//  ContentView.swift
+//  Schematest.swift
 //  Retriever
 //
-//  Created by Hugo Kindstedt on 2025-04-14.
+//  Created by Hugo Kindstedt on 2025-04-20.
 //
 
 import SwiftUI
 
 struct SchemaView: View {
+    let events: [Event]
+    
     var body: some View {
-        Text("Retriever")
-            .font(.title)
-        Text("SchemaView")
-            .font(.subheadline)
+        List(events){ event in
+            EventView(event: event)
+        }
     }
 }
 
 #Preview {
-    SchemaView()
+    SchemaView(events: Event.sampleData)
 }
