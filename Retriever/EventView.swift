@@ -14,17 +14,7 @@ struct EventView: View {
         let calendar = Calendar.current
         
         VStack (alignment: .leading){
-            /*
-            HStack(spacing: 0){
-                Text(String(calendar.component(.year, from: event.startDate)))
-                Text("-")
-                Text(String(calendar.component(.month, from: event.startDate)))
-                Text("-")
-                Text(String(calendar.component(.day, from: event.startDate)))
-            }.font(.title)
-          */
-        
-            HStack{
+            HStack(){
                 HStack(spacing: 0){
                     Text(String(calendar.component(.hour, from: event.startDate)))
                     Text(":")
@@ -42,7 +32,6 @@ struct EventView: View {
             Text(event.location)
         }
         .padding(.horizontal)
-        //.border(Color.gray)
     }
 }
 

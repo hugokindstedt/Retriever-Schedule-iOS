@@ -11,22 +11,13 @@ struct SchemaView: View {
     let weeks: [Week]
     
     var body: some View {
-        ScrollView{
-            VStack(alignment: .leading, spacing: 60){
-                ForEach(weeks) { week in
-                    WeekView(week: week)
+            ScrollView{
+                VStack(spacing: 50){
+                    ForEach(weeks) { week in
+                        WeekView(week: week)
+                    }
                 }
             }
-        }
-
-        
-        /*List(weeks){ week in
-            //Section(){
-                WeekView(week: week)
-            //}
-            
-        }*/
-        
     }
 }
 
