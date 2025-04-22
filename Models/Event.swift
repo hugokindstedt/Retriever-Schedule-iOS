@@ -9,35 +9,39 @@ import Foundation
 
 struct Event: Identifiable {
     let id: UUID
-    var startDate: String
-    var startTime: String
-    var startYear: String
-    var startMonth: String
-    var startDay: String
-    var endDate: String
-    var endTime: String
-    var location: String
-    var kursGrp: String
-    var sign: String
-    var moment: String
+    
+    let startDate: Date
+    let endDate: Date
+    
+    /*let startDate: String
+    let startTime: String
+    let startYear: String
+    let startMonth: String
+    let startDay: String*/
+    
+    
+    /*let endDate: String
+    let endTime: String*/
+    
+    let location: String
+    let kursGrp: String
+    let sign: String
+    let moment: String
             
     init(id: UUID = UUID(), start: String, end: String, location: String, summary: String) {
         self.id = id
         
-        startDate = String(start.firstMatch(of: /DTSTART:(\d+)/)?.1 ?? "N/A")
-        startTime = String(start.firstMatch(of: /T(\d{4})/)?.1 ?? "N/A")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd'T'HHmmssZ"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
-        startYear = String(startDate.prefix(4))
+        let inputStartDate = String(start.suffix(16))
+        //print(startDateTest2)
+        startDate = dateFormatter.date(from: inputStartDate)!
         
-        let monthStartIndex = startDate.index(startDate.startIndex, offsetBy: 4)
-        let monthEndIndex = startDate.index(monthStartIndex, offsetBy: 2)
-        let dayStartIndex = monthEndIndex
-        let dayEndIndex = startDate.index(dayStartIndex, offsetBy: 2)
-        startMonth = String(startDate[monthStartIndex..<monthEndIndex])
-        startDay = String(startDate[dayStartIndex..<dayEndIndex])
-        
-        endDate = String(end.firstMatch(of: /DTEND:(\d+)/)?.1 ?? "N/A")
-        endTime = String(end.firstMatch(of: /T(\d{4})/)?.1 ?? "N/A")
+        let inputEndDate = String(end.suffix(16))
+        endDate = dateFormatter.date(from: inputEndDate)!
         
         self.location = String(location.firstMatch(of: /LOCATION:(.+)/)?.1 ?? "N/A")
         

@@ -68,20 +68,73 @@ func parseIcalToEvents(icalFile: String) -> [Event]{
     return eventList
 }
 
+func groupEventsToDays(events: [Event]) -> [Day]{
+    var mutableEvents = events
+    var days: [Day] = []
+    
+    while !mutableEvents.isEmpty {
+        let currentEvent = mutableEvents.removeFirst()
+        var eventsOnSameDay: [Event] = [currentEvent]
+        
+        // Remove all events on that date and append them to eventsOnsameDay
+        mutableEvents.removeAll { (event) -> Bool in
+            let dateFormat = Date.FormatStyle(date: .long, time: .omitted)
+            
+            if dateFormat.format(event.startDate) == dateFormat.format(currentEvent.startDate) {
+                eventsOnSameDay.append(event)
+                return true
+            }
+            return false
+        }
+     
+        let newDay = Day(startDate: eventsOnSameDay[0].startDate, events: eventsOnSameDay)
+        
+        days.append(newDay)
+    }
+    return days
+}
+
+func groupDaysToWeeks(days: [Day]) -> [Week]{
+    var mutableDays = days
+    var weeks: [Week] = []
+    
+    let calendar: Calendar = Calendar.current
+    
+    while !mutableDays.isEmpty {
+        let currentDay = mutableDays.removeFirst()
+        var daysInSameWeek: [Day] = [currentDay]
+        
+        // Remove all days on that date and append them to daysInSameWeek
+        mutableDays.removeAll { (day) -> Bool in
+            if calendar.component(.weekOfYear, from: day.startDate) == calendar.component(.weekOfYear, from: currentDay.startDate) {
+                daysInSameWeek.append(day)
+                return true
+            }
+            return false
+        }
+        
+        let weekNumber = calendar.component(.weekOfYear, from: currentDay.startDate)
+        let newWeek = Week(weekNumber: weekNumber, days: daysInSameWeek)
+        
+        weeks.append(newWeek)
+    }
+    return weeks
+}
+
+func getWeekNumber() -> Int {
+    let calendar = Calendar(identifier: .gregorian)
+    let components = calendar.dateComponents([.weekOfYear], from: Date())
+    return components.weekOfYear ?? 0
+}
+
 enum HTTPError: Error {
     case invalidResponse
 }
 
-@main
-struct RetrieverApp: App {
-    var body: some Scene {
-        WindowGroup {
-            RootView()
-        }
-    }
-}
-
+// BORDE LIGGA I EGEN FIL
 struct RootView: View {
+    @State private var weeks: [Week] = []
+    @State private var days: [Day] = []
     @State private var events: [Event] = []
     @State private var isLoading = true
     
@@ -90,7 +143,7 @@ struct RootView: View {
             if isLoading {
                 Text("Loading...")
             } else {
-                SchemaView(events: events)
+                SchemaView(weeks: weeks)
             }
         }
         .task {
@@ -107,14 +160,40 @@ struct RootView: View {
             
             events = parseIcalToEvents(icalFile: icalFile)
             
-            /*
+            days = groupEventsToDays(events: events)
+            
+            weeks = groupDaysToWeeks(days: days)
+            
+            for i in weeks{
+                print(i)
+                print("\n")
+            }
+            
+            print("---")
+            
+            for i in days{
+                print(i)
+                print("\n")
+            }
+            
+            print("---")
+            
             for i in events{
                 print(i)
                 print("\n")
             }
-            */
+            
             
             isLoading = false
+        }
+    }
+}
+
+@main
+struct RetrieverApp: App {
+    var body: some Scene {
+        WindowGroup {
+            RootView()
         }
     }
 }

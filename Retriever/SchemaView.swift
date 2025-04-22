@@ -8,15 +8,28 @@
 import SwiftUI
 
 struct SchemaView: View {
-    let events: [Event]
+    let weeks: [Week]
     
     var body: some View {
-        List(events){ event in
-            EventView(event: event)
+        ScrollView{
+            VStack(alignment: .leading, spacing: 60){
+                ForEach(weeks) { week in
+                    WeekView(week: week)
+                }
+            }
         }
+
+        
+        /*List(weeks){ week in
+            //Section(){
+                WeekView(week: week)
+            //}
+            
+        }*/
+        
     }
 }
 
 #Preview {
-    SchemaView(events: Event.sampleData)
+    //SchemaView(events: Event.sampleData)
 }

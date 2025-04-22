@@ -11,26 +11,28 @@ struct EventView: View {
     let event: Event
     
     var body: some View {
+        let calendar = Calendar.current
+        
         VStack (alignment: .leading){
             /*
             HStack(spacing: 0){
-                Text(event.startYear)
+                Text(String(calendar.component(.year, from: event.startDate)))
                 Text("-")
-                Text(event.startMonth)
+                Text(String(calendar.component(.month, from: event.startDate)))
                 Text("-")
-                Text(event.startDay)
+                Text(String(calendar.component(.day, from: event.startDate)))
             }.font(.title)
-            */
-             
+          */
+        
             HStack{
                 HStack(spacing: 0){
-                    Text(event.startTime.prefix(2))
+                    Text(String(calendar.component(.hour, from: event.startDate)))
                     Text(":")
-                    Text(event.startTime.suffix(2))
+                    Text(String(calendar.component(.minute, from: event.startDate)))
                     Text(" - ")
-                    Text(event.endTime.prefix(2))
+                    Text(String(calendar.component(.hour, from: event.endDate)))
                     Text(":")
-                    Text(event.endTime.suffix(2))
+                    Text(String(calendar.component(.minute, from: event.endDate)))
                 }
             }.bold()
             
@@ -40,7 +42,7 @@ struct EventView: View {
             Text(event.location)
         }
         .padding(.horizontal)
-        .border(Color.gray)
+        //.border(Color.gray)
     }
 }
 
