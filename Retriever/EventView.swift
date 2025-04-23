@@ -16,15 +16,17 @@ struct EventView: View {
         VStack (alignment: .leading){
             HStack(){
                 HStack(spacing: 0){
-                    Text(String(calendar.component(.hour, from: event.startDate)))
+                    // %02d gives leading or trailing zero
+                    Text(String(format: "%02d", calendar.component(.hour, from: event.startDate)))
                     Text(":")
-                    Text(String(calendar.component(.minute, from: event.startDate)))
+                    Text(String(format: "%02d", calendar.component(.minute, from: event.startDate)))
                     Text(" - ")
-                    Text(String(calendar.component(.hour, from: event.endDate)))
+                    Text(String(format: "%02d", calendar.component(.hour, from: event.endDate)))
                     Text(":")
-                    Text(String(calendar.component(.minute, from: event.endDate)))
+                    Text(String(format: "%02d", calendar.component(.minute, from: event.endDate)))
                 }
-            }.bold()
+            }
+            .bold()
             
             Text(event.kursGrp)
                 .foregroundStyle(.orange)
@@ -32,6 +34,7 @@ struct EventView: View {
             Text(event.location)
         }
         .padding(.horizontal)
+        .foregroundStyle(Color("EventTextColor"))
     }
 }
 

@@ -22,8 +22,9 @@ struct Day: Identifiable {
         //self.weekOfYear = Calendar.current.component(.weekOfYear, from: startDate)
        
         let weekDayFormatter = DateFormatter()
-        weekDayFormatter.dateFormat = "EEEE"
-        self.dayOfWeek = weekDayFormatter.string(from: startDate)
+        weekDayFormatter.locale = Locale.current
+        weekDayFormatter.setLocalizedDateFormatFromTemplate("EEEE")
+        self.dayOfWeek = weekDayFormatter.string(from: startDate).capitalized
         
         /*
         let test = Date.FormatStyle()

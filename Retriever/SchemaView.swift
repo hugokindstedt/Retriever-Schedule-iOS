@@ -11,6 +11,10 @@ struct SchemaView: View {
     let weeks: [Week]
     
     var body: some View {
+        ZStack{
+            Color("BackgroundColor")
+                .ignoresSafeArea(.all)
+            
             ScrollView{
                 VStack(spacing: 50){
                     ForEach(weeks) { week in
@@ -18,6 +22,11 @@ struct SchemaView: View {
                     }
                 }
             }
+            .padding(.top, 1)
+            .refreshable {
+                // TODO
+            }
+        }
     }
 }
 

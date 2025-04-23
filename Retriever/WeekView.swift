@@ -18,14 +18,16 @@ struct WeekView: View {
                     Text("V.")
                     Text(String(week.weekNumber))
                 }
-                .font(.title)
-                .padding(.horizontal, 5)
+                .font(.headline)
                 
-                // Horizontal divider
+                // Used for a horizontal divider
                 VStack(){
                     Divider()
+                        .overlay(Color("EventTextColor"))
                 }
             }
+            .padding(.horizontal, 20)
+            .foregroundStyle(Color("EventTextColor"))
 
             VStack(){
                 ForEach(week.days){day in
@@ -33,8 +35,7 @@ struct WeekView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
-            //.border(Color.blue)
-        }//.contentMargins(.all, 10)
+        }
     }
 }
 

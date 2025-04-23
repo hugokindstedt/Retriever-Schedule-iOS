@@ -14,28 +14,33 @@ struct DayView: View {
     var body: some View {
         ZStack(alignment: .topLeading){
             RoundedRectangle(cornerRadius: 10)
-                .fill(Color.gray.opacity(0.1))
+                .fill(Color("DayColor"))
             
             VStack(alignment: .leading){
                 HStack(spacing: 0){
                     Text(String(calendar.component(.year, from: day.startDate)))
                     Text("-")
-                    Text(String(calendar.component(.month, from: day.startDate)))
+                    Text(String(format: "%02d", calendar.component(.month, from: day.startDate)))
                     Text("-")
-                    Text(String(calendar.component(.day, from: day.startDate)))
+                    Text(String(format: "%02d", calendar.component(.day, from: day.startDate)))
                     Text(" ")
                     Text(day.dayOfWeek)
-                }.font(.headline)
+                }
+                .font(.headline)
+                .foregroundStyle(Color("EventTextColor"))
                 
                 VStack() {
                     ForEach(day.events){ event in
                         EventView(event: event)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
+                    .padding(.bottom, 5)
                 }
             }
+            .padding(10)
         }
-        .padding(10)
+        .padding(.vertical, 5)
+        .padding(.horizontal, 20)
     }
 }
 
