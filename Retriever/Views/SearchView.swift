@@ -40,30 +40,60 @@ func parseSearchHtml(html: String) -> [SearchResult] {
 }
 
 struct SearchView: View {
+    //@Environment(\.editMode) private var editMode
+    @State private var editMode: EditMode = .inactive
+    
     @State private var searchText: String = ""
     @State private var searchResult: String = ""
+    @State private var results: [SearchResult] = []
+    
+    @State private var multiSelection = Set<String>()
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        TextField("Sök schema", text: $searchText)
-            .border(Color.gray)
-            .padding(.horizontal)
-        Text(searchText)
-        Button("Sök") {
-            Task{
-                do {
-                    searchResult = try await searchSchedule(searchTerm: searchText)
-                } catch {
-                    // FIXA LOGIK
-                    _ = HTTPError.invalidResponse
+            HStack{
+                TextField("Sök schema", text: $searchText)
+                    .padding(6)
+                    .background(Color.gray.opacity(0.1))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .padding(.horizontal)
+                Button("Sök") {
+                    Task{
+                        do {
+                            searchResult = try await searchSchedule(searchTerm: searchText)
+                        } catch {
+                            // FIXA LOGIK
+                            _ = HTTPError.invalidResponse
+                        }
+                        results = parseSearchHtml(html: searchResult)
+                        //print(results)
+                        editMode = .active
+                    }
                 }
+                .buttonStyle(.bordered)
                 
-                let results = parseSearchHtml(html: searchResult)
-                print(results)
             }
+            .padding(.horizontal)
+            
+            List(results, selection: $multiSelection){ result in
+                SearchResultView(result: result)
+            }
+            .listStyle(PlainListStyle())
+            .environment(\.editMode, $editMode)
+            .padding(0)
+            
+        if(!multiSelection.isEmpty){
+            Button("Visa val") {
+                if !multiSelection.isEmpty {
+                    print("Val: \(multiSelection)")
+                }
+            }
+            .buttonStyle(.borderedProminent)
         }
-    }
+
+        Text("\(multiSelection.count) selections")
+        }
 }
+
 
 #Preview {
     SearchView()

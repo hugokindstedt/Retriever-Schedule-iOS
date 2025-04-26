@@ -11,9 +11,13 @@ struct SearchResultView: View {
     let result: SearchResult
     
     var body: some View {
-        Text(result.resource)
-        Text(result.title)
-        Text(result.type)
+        VStack(alignment: .leading){
+            //Text(result.resource)
+            Text(result.title)
+            Text(result.type)
+                .font(.subheadline)
+                .fontWeight(.thin)
+        }
     }
 }
 

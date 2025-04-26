@@ -7,12 +7,15 @@
 
 import Foundation
 
-struct SearchResult {
+struct SearchResult: Identifiable {
+    let id: String
     let resource: String
     let title: String
     let type: String
     
     init(resource: String, title: String) {
+        self.id = resource
+        
         self.resource = resource
         self.title = title
         
