@@ -30,7 +30,16 @@ struct EventView: View {
             
             Text(event.kursGrp)
                 .foregroundStyle(.orange)
-            Text(event.moment)
+            
+            if (event.moment.contains(/Tenta/.ignoresCase())) {
+                Text(event.moment)
+                    .padding(5)
+                    .background(Color.orange)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+            } else {
+                Text(event.moment)
+            }
+            
             Text(event.location)
         }
         .padding(.horizontal)

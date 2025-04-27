@@ -23,8 +23,10 @@ struct SearchResult: Identifiable {
             self.type = "Program"
         } else if(resource.hasPrefix("k.")){
             self.type = "Kurs"
-        }else {
+        }else if(resource.hasPrefix("l.")){
             self.type = "Lokal"
+        } else {
+            self.type = "Unknown"
         }
     }
 }

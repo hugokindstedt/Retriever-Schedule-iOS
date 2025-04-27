@@ -193,7 +193,8 @@ struct RootView: View {
 struct RetrieverApp: App {
     var body: some Scene {
         WindowGroup {
-            RootView()
+            SearchView()
+            //RootView()
         }
     }
 }
