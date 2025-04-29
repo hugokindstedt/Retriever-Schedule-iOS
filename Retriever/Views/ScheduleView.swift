@@ -1,0 +1,61 @@
+//
+//  Schematest.swift
+//  Retriever
+//
+//  Created by Hugo Kindstedt on 2025-04-20.
+//
+
+import SwiftUI
+
+struct ScheduleView: View {
+    let schedule: Schedule
+    @State private var weeks: [Week] = []
+    
+    var body: some View {
+        ZStack{
+            Color("ScheduleBackgroundColor")
+                .ignoresSafeArea(.all)
+        
+        Group {
+            if (weeks.isEmpty) {
+                ProgressView()
+            } else {
+                    ScrollView{
+                        VStack(spacing: 50){
+                            ForEach(weeks) { week in
+                                WeekView(week: week)
+                                
+                            }
+                        }
+                    }
+                    .padding(.top, 1)
+                    .refreshable {
+                        // TODO
+                    }
+                }
+            }
+        }
+        .task {
+            //print("Hello, World!")
+            var icalFile: String = ""
+            
+            do{
+                icalFile = try await getSchema(resources: schedule.resources)
+            } catch {
+                _ = HTTPError.invalidResponse
+                print("ERROR")
+            }
+            
+            let events = parseIcalToEvents(icalFile: icalFile)
+            let days = groupEventsToDays(events: events)
+            weeks = groupDaysToWeeks(days: days)
+            //print(weeks)
+        }
+    }
+}
+
+#Preview {
+    let schedule = Schedule.sampleData[0]
+    
+    ScheduleView(schedule: schedule)
+}
