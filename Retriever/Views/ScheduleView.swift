@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ScheduleView: View {
-    let schedule: Schedule
+    let schedule: CDSchedule
     @State private var weeks: [Week] = []
     
     var body: some View {
@@ -36,11 +36,10 @@ struct ScheduleView: View {
             }
         }
         .task {
-            //print("Hello, World!")
             var icalFile: String = ""
             
             do{
-                icalFile = try await getSchema(resources: schedule.resources)
+                icalFile = try await getSchema(resources: schedule.resources ?? [])
             } catch {
                 _ = HTTPError.invalidResponse
                 print("ERROR")
@@ -49,13 +48,12 @@ struct ScheduleView: View {
             let events = parseIcalToEvents(icalFile: icalFile)
             let days = groupEventsToDays(events: events)
             weeks = groupDaysToWeeks(days: days)
-            //print(weeks)
         }
     }
 }
 
 #Preview {
-    let schedule = Schedule.sampleData[0]
+    //let schedule = Schedule.sampleData[0]
     
-    ScheduleView(schedule: schedule)
+    //ScheduleView(schedule: schedule)
 }

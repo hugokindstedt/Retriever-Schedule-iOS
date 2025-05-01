@@ -31,7 +31,7 @@ func removeDuplicates(input: String) -> String {
     return newString
 }
 
-func endpointBuilder(resource: Set<String>) -> String {
+func endpointBuilder(resource: [String]) -> String {
     var endpoint = "https://schema.oru.se/setup/jsp/SchemaICAL.ics?startDatum=idag&intervallTyp=m&intervallAntal=6&sprak=SV&sokMedAND=true&forklaringar=true&resurser="
     
     for i in resource {
@@ -44,7 +44,12 @@ func endpointBuilder(resource: Set<String>) -> String {
     return endpoint;
 }
 
-func getSchema(resources: Set<String>) async throws -> String {
+func getSchema(resources: [String]) async throws -> String {
+    // BEHÖVER TESTAS!
+    if resources == [] {
+        return ""
+    }
+    
     //let endpoint: String = "https://schema.oru.se/setup/jsp/SchemaICAL.ics?startDatum=idag&intervallTyp=m&intervallAntal=6&sprak=SV&sokMedAND=true&forklaringar=true&resurser=p.H%C3%B6gskoleingenj%C3%B6r+-+Datateknik+%C3%A5k+2-"
     
     let endpoint = endpointBuilder(resource: resources)

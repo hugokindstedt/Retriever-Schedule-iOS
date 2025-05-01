@@ -7,8 +7,12 @@
 
 import SwiftUI
 
+
+
 struct RootView: View {
-    @EnvironmentObject var scheduleStore: ScheduleStore
+    @FetchRequest(sortDescriptors: []) var schedules: FetchedResults<CDSchedule>
+    @Environment(\.managedObjectContext) var moc
+    
     @State private var path = NavigationPath()
     
     var body: some View {
@@ -27,28 +31,32 @@ struct RootView: View {
                         }
                         
                         HStack {
-                            NavigationLink(value: 1) {
+                            NavigationLink(value: "SearchView") {
                                 Spacer()
                                 Text("+")
                                     .font(.title)
                                     .padding(.horizontal, 30)
+                                    .foregroundStyle(.blue)
                             }
                         }
                     }
                     
                     List {
-                        ForEach(scheduleStore.schedules) { schedule in
+                        ForEach(schedules) { schedule in
                             NavigationLink(destination: ScheduleView(schedule: schedule)) {
                                 TrueScheduleView(schedule: schedule)
                             }
+                        }
+                        .onDelete { offsets in
+                            deleteSavedSchedule(in: moc, at: offsets, from: schedules)
                         }
                     }
                     .scrollContentBackground(.hidden)
                 }
                 .foregroundStyle(Color("EventTextColor"))
             }
-            .navigationDestination(for: Int.self) { identifier in
-                if identifier == 1 {
+            .navigationDestination(for: String.self) { identifier in
+                if identifier == "SearchView" {
                     SearchView(path: $path)
                 }
             }
@@ -58,6 +66,6 @@ struct RootView: View {
 
 #Preview {
     RootView()
-        .environmentObject(ScheduleStore.preview)
+        //.environmentObject()
 }
 

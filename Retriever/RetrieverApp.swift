@@ -6,16 +6,15 @@
 //
 
 import SwiftUI
-//import Foundation
 
 @main
 struct RetrieverApp: App {
-    @StateObject var scheduleStore = ScheduleStore.preview
+    @StateObject private var dataController = DataController()
     
     var body: some Scene {
         WindowGroup {
             RootView()
-                .environmentObject(scheduleStore)
+                .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
 }

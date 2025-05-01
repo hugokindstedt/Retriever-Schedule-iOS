@@ -10,9 +10,9 @@ import Foundation
 struct Schedule: Identifiable {
     let id: UUID
     let name: String
-    let resources: Set<String>
+    let resources: [String]
     
-    init(id: UUID = UUID(), name: String, resources: Set<String>) {
+    init(id: UUID = UUID(), name: String, resources: [String]) {
         self.id = id
         
         self.name = name

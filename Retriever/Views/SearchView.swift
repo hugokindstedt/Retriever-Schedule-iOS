@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SearchView: View {
-    //@Environment(\.editMode) private var editMode
     @Binding var path: NavigationPath
     
     @State private var editMode: EditMode = .inactive
@@ -48,7 +47,6 @@ struct SearchView: View {
                                     _ = HTTPError.invalidResponse
                                 }
                                 results = parseSearchHtml(html: searchResult)
-                                //print(results)
                                 editMode = .active
                             }
                         }

@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct TrueScheduleView: View {
-    let schedule: Schedule
+    let schedule: CDSchedule
     
     var body: some View {
         VStack(alignment: .leading){
-            Text(schedule.name)
+            Text(schedule.name ?? "NO NAME")
                 .font(.headline)
-            ForEach(Array(schedule.resources), id: \.self){ resource in
+            ForEach(Array(schedule.resources ?? []), id: \.self){ resource in
                 Text(convertResourceToReadableString(resource: resource))
                     .font(.footnote)
             }
@@ -23,6 +23,6 @@ struct TrueScheduleView: View {
 }
 
 #Preview {
-    let schedule = Schedule.sampleData[0]
-    TrueScheduleView(schedule: schedule)
+    //let schedule = Schedule.sampleData[0]
+    //TrueScheduleView(schedule: schedule)
 }

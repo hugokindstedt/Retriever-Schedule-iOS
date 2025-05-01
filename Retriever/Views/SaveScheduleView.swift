@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct SaveScheduleView: View {
-    @EnvironmentObject var scheduleStore: ScheduleStore
+    @Environment(\.managedObjectContext) var moc
+    
     let multiSelection: Set<String>
     @Binding var path: NavigationPath
     @State private var scheduleName: String = ""
-    
     @FocusState private var isFocused: Bool
     
     var body: some View {
+        let selectedResources = Array(multiSelection).sorted()
+        
         ZStack {
             Color("BackgroundColor")
                 .ignoresSafeArea(.all)
@@ -30,8 +32,8 @@ struct SaveScheduleView: View {
                 
                 Section(header: Text("Valda resurser")){
                     List{
-                        ForEach(Array(multiSelection), id: \.self) { item in
-                            Text(convertResourceToReadableString(resource: item))
+                        ForEach(selectedResources, id: \.self) { resource in
+                            Text(convertResourceToReadableString(resource: resource))
                         }
                     }
                 }
@@ -48,9 +50,17 @@ struct SaveScheduleView: View {
                             .disabled(true)
                     } else {
                         Button("Spara") {
-                            let newSchedule: Schedule = Schedule(name: scheduleName, resources: multiSelection)
-                            print(newSchedule)
-                            scheduleStore.schedules.append(newSchedule)
+                            let newSchedule = CDSchedule(context: moc)
+                            newSchedule.id = UUID()
+                            newSchedule.name = scheduleName
+                            newSchedule.resources = selectedResources
+                            
+                            do {
+                                try moc.save()
+                            } catch {
+                                print("ERROR SAVING NEW SCHEDULE: \(error)")
+                            }
+                            
                             path = NavigationPath()
                         }
                         .frame(maxWidth: .infinity)
@@ -63,9 +73,9 @@ struct SaveScheduleView: View {
                 .listRowInsets(EdgeInsets())
             }
             .navigationTitle(Text("Spara schemat"))
+            .scrollContentBackground(.hidden)
             .foregroundStyle(Color("EventTextColor"))
         }
-        .foregroundStyle(Color("EventTextColor"))
         .onAppear {
             isFocused = true
         }

@@ -36,6 +36,7 @@ struct EventView: View {
                     .padding(5)
                     .background(Color.orange)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .foregroundColor(.black)
             } else {
                 Text(event.moment)
             }
