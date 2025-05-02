@@ -44,12 +44,27 @@ struct RootView: View {
                     List {
                         ForEach(schedules) { schedule in
                             NavigationLink(destination: ScheduleView(schedule: schedule)) {
-                                TrueScheduleView(schedule: schedule)
+                                ScheduleMenuView(schedule: schedule)
+                                    .allowsHitTesting(false)
+                            }
+                            .contextMenu {
+                                Button(role: .destructive) {
+                                    // ACTION
+                                    deleteSavedSchedule(in: moc, from: schedules, schedule: schedule)
+                                    
+                                } label: {
+                                    Label("Radera", systemImage: "trash")
+                                        
+                                }
+                                
                             }
                         }
                         .onDelete { offsets in
                             deleteSavedSchedule(in: moc, at: offsets, from: schedules)
                         }
+                        /*.onLongPressGesture {
+                            print("long press")
+                        }*/
                     }
                     .scrollContentBackground(.hidden)
                 }

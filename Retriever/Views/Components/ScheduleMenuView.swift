@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TrueScheduleView: View {
+struct ScheduleMenuView: View {
     let schedule: CDSchedule
     
     var body: some View {

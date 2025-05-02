@@ -1,0 +1,181 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    " " : {
+
+    },
+    " - " : {
+
+    },
+    "-" : {
+
+    },
+    ":" : {
+
+    },
+    "%lld val" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld choices"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld val"
+          }
+        }
+      }
+    },
+    "+" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+"
+          }
+        }
+      }
+    },
+    "Krävs" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Required"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Krävs"
+          }
+        }
+      }
+    },
+    "Namn" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Namn"
+          }
+        }
+      }
+    },
+    "Nytt schema %lld" : {
+
+    },
+    "Radera" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Radera"
+          }
+        }
+      }
+    },
+    "Retriever" : {
+
+    },
+    "Skapa nytt schema" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create a new schedule"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skapa nytt schema"
+          }
+        }
+      }
+    },
+    "Sök efter program, kurs eller annan resurs" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for program, course or other resource"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sök efter program, kurs eller annan resurs"
+          }
+        }
+      }
+    },
+    "Spara" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spara"
+          }
+        }
+      }
+    },
+    "Spara schemat" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save schedule"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spara schemat"
+          }
+        }
+      }
+    },
+    "V." : {
+
+    },
+    "Valda resurser" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selected resources"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valda resurser"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

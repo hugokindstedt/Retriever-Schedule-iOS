@@ -9,13 +9,17 @@ import SwiftUI
 
 struct SaveScheduleView: View {
     @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: []) var schedules: FetchedResults<CDSchedule>
     
     let multiSelection: Set<String>
     @Binding var path: NavigationPath
+    
+    @Environment(\.colorScheme) private var colorScheme
     @State private var scheduleName: String = ""
     @FocusState private var isFocused: Bool
     
     var body: some View {
+        
         let selectedResources = Array(multiSelection).sorted()
         
         ZStack {
@@ -23,14 +27,30 @@ struct SaveScheduleView: View {
                 .ignoresSafeArea(.all)
             
             Form{
-                Section(header: Text("Namn")){
-                    TextField(text: $scheduleName, prompt: Text("Krävs")) {
-                        Text("Namn")
+                Section(header: Text(String(localized: "Namn"))){
+                    TextField(text: $scheduleName, prompt: Text(String(localized: "Krävs"))) {
+                        Text(String(localized: "Namn"))
                     }
                     .focused($isFocused)
+                    .overlay{
+                        HStack{
+                            Spacer()
+                            
+                            if(!scheduleName.isEmpty){
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundStyle(Color.gray)
+                                    .padding(0)
+                                    .onTapGesture {
+                                        scheduleName = ""
+                                        isFocused = true
+                                    }
+                            }
+                        }
+                    }
                 }
+
                 
-                Section(header: Text("Valda resurser")){
+                Section(header: Text(String(localized: "Valda resurser"))){
                     List{
                         ForEach(selectedResources, id: \.self) { resource in
                             Text(convertResourceToReadableString(resource: resource))
@@ -41,7 +61,7 @@ struct SaveScheduleView: View {
                 Section{
                     // Disable button if no name has been given to the schedule
                     if(scheduleName.isEmpty) {
-                        Button("Spara") {  }
+                        Button(String(localized: "Spara")) {  }
                             .frame(maxWidth: .infinity)
                             .foregroundStyle(.white)
                             .fontWeight(.bold)
@@ -49,7 +69,7 @@ struct SaveScheduleView: View {
                             .background(Color.blue)
                             .disabled(true)
                     } else {
-                        Button("Spara") {
+                        Button(String(localized: "Spara")) {
                             let newSchedule = CDSchedule(context: moc)
                             newSchedule.id = UUID()
                             newSchedule.name = scheduleName
@@ -72,11 +92,12 @@ struct SaveScheduleView: View {
                 }
                 .listRowInsets(EdgeInsets())
             }
-            .navigationTitle(Text("Spara schemat"))
-            .scrollContentBackground(.hidden)
+            .navigationTitle(Text(String(localized: "Spara schemat")))
+            .scrollContentBackground(colorScheme == .dark ? .hidden : .visible)
             .foregroundStyle(Color("EventTextColor"))
         }
         .onAppear {
+            scheduleName = String(localized: "Nytt schema \(schedules.count+1)")
             isFocused = true
         }
     }

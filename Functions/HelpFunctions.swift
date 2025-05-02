@@ -30,3 +30,9 @@ func deleteSavedSchedule(in moc: NSManagedObjectContext, at offsets: IndexSet, f
         print("ERROR SAVING SCHEDULE UPDATE: \(error)")
     }
 }
+
+func deleteSavedSchedule(in moc: NSManagedObjectContext, from schedules: FetchedResults<CDSchedule>, schedule: FetchedResults<CDSchedule>.Element) {
+    if let index = schedules.firstIndex(where: { $0.id == schedule.id }) {
+        deleteSavedSchedule(in: moc, at: IndexSet(integer: index), from: schedules)
+    }
+}

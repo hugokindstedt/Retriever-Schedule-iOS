@@ -50,11 +50,7 @@ func getSchema(resources: [String]) async throws -> String {
         return ""
     }
     
-    //let endpoint: String = "https://schema.oru.se/setup/jsp/SchemaICAL.ics?startDatum=idag&intervallTyp=m&intervallAntal=6&sprak=SV&sokMedAND=true&forklaringar=true&resurser=p.H%C3%B6gskoleingenj%C3%B6r+-+Datateknik+%C3%A5k+2-"
-    
     let endpoint = endpointBuilder(resource: resources)
-    
-    print(endpoint)
     
     let url = URL(string: endpoint)!
     
@@ -107,7 +103,8 @@ func groupEventsToDays(events: [Event]) -> [Day]{
             }
             return false
         }
-     
+        print(eventsOnSameDay[0].startDate)
+        print(eventsOnSameDay)
         let newDay = Day(startDate: eventsOnSameDay[0].startDate, events: eventsOnSameDay)
         
         days.append(newDay)
@@ -141,12 +138,6 @@ func groupDaysToWeeks(days: [Day]) -> [Week]{
     }
     return weeks
 }
-
-/*func getWeekNumber() -> Int {
-    let calendar = Calendar(identifier: .gregorian)
-    let components = calendar.dateComponents([.weekOfYear], from: Date())
-    return components.weekOfYear ?? 0
-}*/
 
 enum HTTPError: Error {
     case invalidResponse

@@ -55,14 +55,25 @@ struct SearchView: View {
                                 Spacer()
                                 
                                 if(!searchText.isEmpty){
-                                    Button(action: {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundStyle(Color.gray)
+                                        .padding(20)
+                                        .onTapGesture {
+                                            searchText = ""
+                                            results.removeAll()
+                                            isFocused = true
+                                        }
+                                    
+                                    
+                                    /*Button(action: {
                                         searchText = ""
                                         results.removeAll()
+                                        isFocused = true
                                     }) {
                                         Image(systemName: "xmark.circle.fill")
                                             .foregroundStyle(Color.gray)
                                             .padding(20)
-                                    }
+                                    }*/
                                 }
                             }
                         }
@@ -78,10 +89,10 @@ struct SearchView: View {
                 .padding(0)
                 
                 if(!multiSelection.isEmpty){
-                    Text("\(multiSelection.count) val")
+                    Text(String(localized: "\(multiSelection.count) val"))
                     
                     NavigationLink(destination: SaveScheduleView(multiSelection: multiSelection, path: $path)) {
-                        Text("Spara")
+                        Text(String(localized: "Spara"))
                             .padding(.horizontal, 10)
                             .padding(.vertical, 7)
                             .background(Color.blue)
@@ -92,7 +103,7 @@ struct SearchView: View {
                 }
             }
         }
-        .navigationTitle(Text("Skapa nytt schema"))
+        .navigationTitle(Text(String(localized: "Skapa nytt schema")))
         .foregroundStyle(Color("EventTextColor"))
         .onAppear {
             isFocused = true

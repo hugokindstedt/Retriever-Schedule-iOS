@@ -18,23 +18,12 @@ struct Day: Identifiable {
         self.id = startDate
         
         self.startDate = startDate
-
-        //self.weekOfYear = Calendar.current.component(.weekOfYear, from: startDate)
        
         let weekDayFormatter = DateFormatter()
-        weekDayFormatter.locale = Locale.current
+        weekDayFormatter.locale = Locale(identifier: Locale.preferredLanguages.first ?? "en_US")
         weekDayFormatter.setLocalizedDateFormatFromTemplate("EEEE")
         self.dayOfWeek = weekDayFormatter.string(from: startDate).capitalized
         
-        /*
-        let test = Date.FormatStyle()
-            .year(.omitted)
-            .month(.omitted)
-            .day(.omitted)
-            .weekday()
-        
-        dayOfWeek = test.format(startDate)
-        */
         self.events = events
     }
 }
