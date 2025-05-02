@@ -39,6 +39,22 @@
         }
       }
     },
+    "Inga sparade scheman" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No saved schedules"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Inga sparade scheman"
+          }
+        }
+      }
+    },
     "Krävs" : {
       "localizations" : {
         "en" : {
@@ -72,7 +88,20 @@
       }
     },
     "Nytt schema %lld" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New schedule  %lld"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nytt schema %lld"
+          }
+        }
+      }
     },
     "Radera" : {
       "localizations" : {

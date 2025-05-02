@@ -32,7 +32,13 @@ func removeDuplicates(input: String) -> String {
 }
 
 func endpointBuilder(resource: [String]) -> String {
-    var endpoint = "https://schema.oru.se/setup/jsp/SchemaICAL.ics?startDatum=idag&intervallTyp=m&intervallAntal=6&sprak=SV&sokMedAND=true&forklaringar=true&resurser="
+    var endpoint: String = ""
+    let prefferedLanguage = Locale.preferredLanguages.first ?? "en"
+    if prefferedLanguage.contains(("sv")) {
+        endpoint = "https://schema.oru.se/setup/jsp/SchemaICAL.ics?startDatum=idag&intervallTyp=m&intervallAntal=6&sprak=SV&sokMedAND=true&forklaringar=true&resurser="
+    } else {
+        endpoint = "https://schema.oru.se/setup/jsp/SchemaICAL.ics?startDatum=today&intervallTyp=m&intervallAntal=6&sprak=EN&sokMedAND=true&forklaringar=true&resurser="
+    }
     
     for i in resource {
         endpoint.append(i)
@@ -103,8 +109,7 @@ func groupEventsToDays(events: [Event]) -> [Day]{
             }
             return false
         }
-        print(eventsOnSameDay[0].startDate)
-        print(eventsOnSameDay)
+
         let newDay = Day(startDate: eventsOnSameDay[0].startDate, events: eventsOnSameDay)
         
         days.append(newDay)

@@ -41,32 +41,42 @@ struct RootView: View {
                         }
                     }
                     
-                    List {
-                        ForEach(schedules) { schedule in
-                            NavigationLink(destination: ScheduleView(schedule: schedule)) {
-                                ScheduleMenuView(schedule: schedule)
-                                    .allowsHitTesting(false)
-                            }
-                            .contextMenu {
-                                Button(role: .destructive) {
-                                    // ACTION
-                                    deleteSavedSchedule(in: moc, from: schedules, schedule: schedule)
-                                    
-                                } label: {
-                                    Label("Radera", systemImage: "trash")
-                                        
-                                }
+                    if schedules.isEmpty {
+                        VStack {
+                            Spacer()
+                            HStack {
+                                Spacer()
+                                Text(String(localized: "Inga sparade scheman"))
+                                    .font(.subheadline)
+                                    .fontWeight(.ultraLight)
+                                    .italic(true)
+                                    .padding()
                                 
+                                Spacer()
+                            }
+                            Spacer()
+                        }
+                    } else {
+                        List {
+                            ForEach(schedules) { schedule in
+                                NavigationLink(destination: ScheduleView(schedule: schedule)) {
+                                    ScheduleMenuView(schedule: schedule)
+                                        .allowsHitTesting(false)
+                                }
+                                .contextMenu {
+                                    Button(role: .destructive) {
+                                        deleteSavedSchedule(in: moc, from: schedules, schedule: schedule)
+                                    } label: {
+                                        Label(String(localized: "Radera"), systemImage: "trash")
+                                    }
+                                }
+                            }
+                            .onDelete { offsets in
+                                deleteSavedSchedule(in: moc, at: offsets, from: schedules)
                             }
                         }
-                        .onDelete { offsets in
-                            deleteSavedSchedule(in: moc, at: offsets, from: schedules)
-                        }
-                        /*.onLongPressGesture {
-                            print("long press")
-                        }*/
+                        .scrollContentBackground(.hidden)
                     }
-                    .scrollContentBackground(.hidden)
                 }
                 .foregroundStyle(Color("EventTextColor"))
             }
@@ -77,6 +87,7 @@ struct RootView: View {
             }
         }
     }
+    
 }
 
 #Preview {

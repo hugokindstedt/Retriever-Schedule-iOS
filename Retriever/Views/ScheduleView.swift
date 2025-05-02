@@ -30,7 +30,18 @@ struct ScheduleView: View {
                     }
                     .padding(.top, 1)
                     .refreshable {
-                        // TODO
+                        var icalFile: String = ""
+                        
+                        do{
+                            icalFile = try await getSchema(resources: schedule.resources ?? [])
+                        } catch {
+                            _ = HTTPError.invalidResponse
+                            print("ERROR")
+                        }
+                        
+                        let events = parseIcalToEvents(icalFile: icalFile)
+                        let days = groupEventsToDays(events: events)
+                        weeks = groupDaysToWeeks(days: days)
                     }
                 }
             }
