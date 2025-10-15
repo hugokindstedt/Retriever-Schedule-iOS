@@ -22,7 +22,7 @@ struct ScheduleView: View {
             if (isLoading) {
                 ProgressView()
             } else if (weeks.isEmpty) {
-                Text(String(localized: "KronoX svarade med ett tomt schema. Kontrollera schemats resurser."))
+                Text(String(localized: "KronoX replied with an empty schedule. Check the schedule resources."))
             } else {
                     ScrollView{
                         VStack(spacing: 50){

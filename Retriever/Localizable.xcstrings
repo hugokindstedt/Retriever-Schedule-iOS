@@ -72,7 +72,14 @@
       }
     },
     "KronoX svarade med ett tomt schema. Kontrollera schemats resurser." : {
-
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "KronoX svarade med ett tomt schema. Kontrollera schemats resurser."
+          }
+        }
+      }
     },
     "Namn" : {
       "localizations" : {
