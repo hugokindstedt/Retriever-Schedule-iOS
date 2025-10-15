@@ -48,7 +48,7 @@ struct SaveScheduleView: View {
                         }
                     }
                 }
-
+                
                 
                 Section(header: Text(String(localized: "Valda resurser"))){
                     List{
@@ -59,36 +59,26 @@ struct SaveScheduleView: View {
                 }
                 
                 Section{
-                    // Disable button if no name has been given to the schedule
-                    if(scheduleName.isEmpty) {
-                        Button(String(localized: "Spara")) {  }
-                            .frame(maxWidth: .infinity)
-                            .foregroundStyle(.white)
-                            .fontWeight(.bold)
-                            .padding()
-                            .background(Color.blue)
-                            .disabled(true)
-                    } else {
-                        Button(String(localized: "Spara")) {
-                            let newSchedule = CDSchedule(context: moc)
-                            newSchedule.id = UUID()
-                            newSchedule.name = scheduleName
-                            newSchedule.resources = selectedResources
-                            
-                            do {
-                                try moc.save()
-                            } catch {
-                                print("ERROR SAVING NEW SCHEDULE: \(error)")
-                            }
-                            
-                            path = NavigationPath()
+                    Button(String(localized: "Spara")) {
+                        let newSchedule = CDSchedule(context: moc)
+                        newSchedule.id = UUID()
+                        newSchedule.name = scheduleName
+                        newSchedule.resources = selectedResources
+                        
+                        do {
+                            try moc.save()
+                        } catch {
+                            print("ERROR SAVING NEW SCHEDULE: \(error)")
                         }
-                        .frame(maxWidth: .infinity)
-                        .foregroundStyle(.white)
-                        .fontWeight(.bold)
-                        .padding()
-                        .background(Color.blue)
+                        
+                        path = NavigationPath()
                     }
+                    .frame(maxWidth: .infinity)
+                    .foregroundStyle(.white)
+                    .fontWeight(.bold)
+                    .padding()
+                    .background(Color.blue)
+                    .disabled(scheduleName.isEmpty == true ? true : false)
                 }
                 .listRowInsets(EdgeInsets())
             }
@@ -106,7 +96,7 @@ struct SaveScheduleView: View {
 #Preview {
     NavigationStack {
         let multiSelection: Set<String> = ["p.Biologiprogrammet+%C3%A5k+3-", "p.H%C3%B6gskoleingenj%C3%B6r+-+Datateknik+%C3%A5k+2-"]
-
+        
         SaveScheduleView(multiSelection: multiSelection, path: .constant(NavigationPath()))
     }
 }

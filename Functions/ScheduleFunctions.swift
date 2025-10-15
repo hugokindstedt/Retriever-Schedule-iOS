@@ -44,7 +44,6 @@ func endpointBuilder(resource: [String]) -> String {
         endpoint.append(i)
         endpoint.append(",")
     }
-    
     endpoint.removeLast(1)
     
     return endpoint;

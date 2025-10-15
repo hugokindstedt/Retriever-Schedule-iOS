@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ScheduleView: View {
     let schedule: CDSchedule
+    
     @State private var weeks: [Week] = []
+    @State private var isLoading: Bool = true
     
     var body: some View {
         ZStack{
@@ -17,8 +19,10 @@ struct ScheduleView: View {
                 .ignoresSafeArea(.all)
         
         Group {
-            if (weeks.isEmpty) {
+            if (isLoading) {
                 ProgressView()
+            } else if (weeks.isEmpty) {
+                Text(String(localized: "KronoX svarade med ett tomt schema. Kontrollera schemats resurser."))
             } else {
                     ScrollView{
                         VStack(spacing: 50){
@@ -59,6 +63,8 @@ struct ScheduleView: View {
             let events = parseIcalToEvents(icalFile: icalFile)
             let days = groupEventsToDays(events: events)
             weeks = groupDaysToWeeks(days: days)
+            print(weeks)
+            isLoading = false;
         }
     }
 }
