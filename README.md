@@ -11,17 +11,20 @@ Written purely in Swift and SwiftUI to deliver a native iOS experience.
 Parses Örebro University KronoX to display a schedule with a modern UI and responsive design. Search for resources and create new schedules directly in the app. Supports dark mode.
 
 ## Landing page
-![Landing page](https://github.com/user-attachments/assets/4197dae0-791e-4385-824e-df914cd54754)
-![Laning page2](https://github.com/user-attachments/assets/fa4e6982-9394-4f84-bf89-38dcf76656dc)
+<img width="645" height="1398" alt="Simulator Screenshot - iPhone 16 Plus - 2025-10-16 at 21 00 36" src="https://github.com/user-attachments/assets/c58f65b5-c3f3-49ff-95c9-f8ef19d8c2b7" />
+<img width="645" height="1398" alt="Simulator Screenshot - iPhone 16 Plus - 2025-10-16 at 20 59 56" src="https://github.com/user-attachments/assets/b9fec187-7f01-48b0-a468-13fbcae314a0" />
 
 ## Schedule view
-![Schedule view light mode](https://github.com/user-attachments/assets/bb3f4123-e7e9-47df-8e54-51d29d021d09)
-![Schedule view2 dark mode](https://github.com/user-attachments/assets/b771661e-4264-4a25-a784-d2369ccba7ae)
+<img width="645" height="1398" alt="Simulator Screenshot - iPhone 16 Plus - 2025-10-16 at 21 00 40" src="https://github.com/user-attachments/assets/780b6364-8694-4844-ae1e-91fb2dfe1fd5" />
+<img width="645" height="1398" alt="Simulator Screenshot - iPhone 16 Plus - 2025-10-16 at 21 00 03" src="https://github.com/user-attachments/assets/90a750e0-a70e-489b-920f-19c0616eddcc" />
+
 
 ## Search for resources
-![Search for resources light mode](https://github.com/user-attachments/assets/a681d586-6a2c-43b6-8ba1-e4913aecbbbb)
-![Search for resources dark mode](https://github.com/user-attachments/assets/20190f65-7311-4f9c-bf43-ab31fca0d188)
+<img width="645" height="1398" alt="Simulator Screenshot - iPhone 16 Plus - 2025-10-16 at 21 01 00" src="https://github.com/user-attachments/assets/83084c73-ac91-4868-8044-e3f944dde63d" />
+<img width="645" height="1398" alt="Simulator Screenshot - iPhone 16 Plus - 2025-10-16 at 20 59 23" src="https://github.com/user-attachments/assets/a517779f-0a1c-4db0-a431-08845f495c5b" />
+
 
 ## Save schedule
-![Save schedule light mode](https://github.com/user-attachments/assets/6b8c6315-0cf3-4601-99ae-60e6b0bca7fd)
-![Save schedule dark mode](https://github.com/user-attachments/assets/9edb9f60-735f-4569-8bad-7d7b57b3cd7f)
+<img width="645" height="1398" alt="Simulator Screenshot - iPhone 16 Plus - 2025-10-16 at 21 01 05" src="https://github.com/user-attachments/assets/b9176e8e-0d0a-4fdf-9a75-50a23a4aac12" />
+<img width="645" height="1398" alt="Simulator Screenshot - iPhone 16 Plus - 2025-10-16 at 20 59 26" src="https://github.com/user-attachments/assets/75a12601-edcd-4746-a420-778e12fc2166" />
+
