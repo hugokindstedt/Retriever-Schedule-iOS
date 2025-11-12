@@ -22,6 +22,6 @@ struct SearchResultView: View {
 }
 
 #Preview {
-    let result: SearchResult = SearchResult.sampleData[0]
-    SearchResultView(result: result)
+    //let result: SearchResult = SearchResult.sampleData[0]
+    //SearchResultView(result: result)
 }

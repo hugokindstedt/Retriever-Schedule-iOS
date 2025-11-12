@@ -71,7 +71,7 @@
         }
       }
     },
-    "KronoX svarade med ett tomt schema. Kontrollera schemats resurser." : {
+    "KronoX replied with an empty schedule. Check the schedule resources." : {
       "localizations" : {
         "sv" : {
           "stringUnit" : {

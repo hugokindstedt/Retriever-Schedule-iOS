@@ -49,6 +49,6 @@ struct EventView: View {
 }
 
 #Preview {
-    let event: Event = Event.sampleData[0]
-    EventView(event: event)
+    //let event: Event = Event.sampleData[0]
+    //EventView(event: event)
 }

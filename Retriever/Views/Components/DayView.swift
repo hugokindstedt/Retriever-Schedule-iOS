@@ -45,6 +45,6 @@ struct DayView: View {
 }
 
 #Preview {
-    let day: Day = Day.sampleData[0]
-    DayView(day: day)
+    //let day: Day = Day.sampleData[0]
+    //DayView(day: day)
 }
