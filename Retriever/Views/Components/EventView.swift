@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EventView: View {
     let event: Event
+    @State private var showSign = false
     
     var body: some View {
         let calendar = Calendar.current
@@ -42,13 +43,24 @@ struct EventView: View {
             }
             
             Text(event.location)
+            
+            if(showSign){
+                Text(event.sign)
+            }
+            
         }
         .padding(.horizontal)
         .foregroundStyle(Color("EventTextColor"))
+        
+        // Make the whole event tapable
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .contentShape(Rectangle())
+        
+        .onTapGesture {showSign.toggle()}
     }
 }
 
 #Preview {
-    //let event: Event = Event.sampleData[0]
-    //EventView(event: event)
+    let event: Event = Event.sampleData[0]
+    EventView(event: event)
 }
